@@ -1,0 +1,47 @@
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "jsx": "react-jsx",
+        "module": "esnext",
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "*",
+                "scr/*"
+            ]
+        }
+    },
+    "exclude": [
+        "build",
+        "scripts",
+        "acceptance-tests",
+        "webpack",
+        "jest",
+        "src/setupTests.ts",
+        "node_modules",
+        "obj",
+        "**/*.spec.ts"
+    ],
+    "include": [
+        "src",
+        "src/**/*.ts",
+        "@types/**/*.d.ts",
+    ]
+}
