@@ -43,7 +43,7 @@ export default class SwapiService {
     return results.map(this._transformPerson);
   };
 
-  getPerson = async (id: number): Promise<IPerson> => {
+  getPerson = async (id: string): Promise<IPerson> => {
     const person = await this.getResource(`/people/${id}/`);
     return this._transformPerson(person);
   };
@@ -53,7 +53,7 @@ export default class SwapiService {
     return results.map(this._transformPlanet);
   };
 
-  getPlanet = async (id: number): Promise<IPlanet> => {
+  getPlanet = async (id: string): Promise<IPlanet> => {
     const planet = await this.getResource(`/planets/${id}/`);
     return this._transformPlanet(planet);
   };
@@ -63,7 +63,7 @@ export default class SwapiService {
     return results.map(this._transformStarship);
   };
 
-  getStarship = async (id: number): Promise<IStarship> => {
+  getStarship = async (id: string): Promise<IStarship> => {
     const starship = await this.getResource(`/starships/${id}/`);
     return this._transformStarship(starship);
   };

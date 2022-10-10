@@ -36,7 +36,6 @@ const PeoplePage: FC = () => {
           <PersonDetails
             item={person}
             img={swapiService.getPersonImage({
-              //@ts-ignore
               id: person.id,
             })}
           />

@@ -153,6 +153,7 @@ const theme = createTheme({
           textTransform: "none",
           fontWeight: 600,
           fontSize: "14px",
+          color: colorSet.secondaryGreen,
         },
       },
     },
