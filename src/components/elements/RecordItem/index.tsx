@@ -6,12 +6,11 @@ interface IPropsRecord {
   label: string;
 }
 
-const Record: FC<IPropsRecord> = ({ item, field, label }) => {
-  return (
-    <li className="list-group-item">
-      <span className="term">{label}</span>
-      <span>{item[field]}</span>
-    </li>
-  );
-};
+const Record: FC<IPropsRecord> = ({ item, field, label }) => (
+  <li className="list-group-item">
+    <span className="term">{label}</span>
+    <span>{item[field]}</span>
+  </li>
+);
+
 export default Record;

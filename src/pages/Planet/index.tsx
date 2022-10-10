@@ -1,48 +1,22 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useParams } from "react-router";
 import ItemDetails from "src/components/elements/ItemDetails";
 import ItemList from "src/components/elements/ItemList";
 import Record from "src/components/elements/RecordItem";
 import Row from "src/components/elements/Row";
 import Spinner from "src/components/elements/Spinner";
-import SwapiService, { IPlanet } from "src/service";
-
-const serv = new SwapiService();
+import useRequest from "src/components/hooks/useRequest";
+import { swapiService } from "src/service";
 
 const PlanetPage: FC = () => {
   const { id } = useParams();
-  const [planets, setPlanets] = useState<IPlanet[]>([] as IPlanet[]);
-  const [selectedItem, setSelectedItem] = useState<IPlanet>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [selIsLoading, setSelIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (id) {
-      setSelIsLoading(true);
-      try {
-        serv.getPlanet(+id).then((response) => {
-          setSelectedItem(response);
-          setSelIsLoading(false);
-        });
-      } catch (e) {
-        console.log("e :>> ", e);
-        setSelIsLoading(false);
-      }
-    }
-  }, [id]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    try {
-      serv.getAllPlanets().then((response) => {
-        setIsLoading(false);
-        setPlanets(response);
-      });
-    } catch (e) {
-      console.log("e :>> ", e);
-      setIsLoading(false);
-    }
-  }, []);
+  const [planets, isLoadingPlanets, errorPlanets] = useRequest(
+    swapiService.getAllPlanets
+  );
+  const [currentPlanet, isLoadPlanet, errorPlanet] = useRequest(
+    swapiService.getPlanet,
+    id!
+  );
 
   const PlanetDetails = (props: any) => (
     <ItemDetails {...props}>
@@ -52,24 +26,30 @@ const PlanetPage: FC = () => {
     </ItemDetails>
   );
 
-  console.log("planet", planets);
-  if (isLoading) return <Spinner />;
-  else if (planets && !isLoading)
-    return (
-      <Row
-        left={<ItemList data={planets} />}
-        right={
-          selIsLoading ? (
-            <Spinner />
-          ) : selectedItem ? (
-            <PlanetDetails
-              item={selectedItem}
-              img={serv.getPlanetImage({ id: selectedItem.id })}
-            />
-          ) : null
-        }
-      />
-    );
+  const _renderPlanet = () => {
+    if (id) {
+      if (isLoadPlanet) {
+        return <Spinner />;
+      } else if (currentPlanet) {
+        return (
+          <PlanetDetails
+            item={currentPlanet}
+            img={swapiService.getPlanetImage({
+              //@ts-ignore
+              id: currentPlanet.id,
+            })}
+          />
+        );
+      } else if (errorPlanet) {
+        return errorPlanet;
+      } else return null;
+    }
+  };
+
+  if (isLoadingPlanets) return <Spinner />;
+  else if (planets && !isLoadingPlanets)
+    return <Row left={<ItemList data={planets} />} right={_renderPlanet()} />;
+  else if (errorPlanets) return <h2>Planets error</h2>;
   else return null;
 };
 

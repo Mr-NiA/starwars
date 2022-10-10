@@ -15,7 +15,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const NavBar: FC = () => {
   const drawerWidth = 240;
-  const navItems = ["Planet", "People", "Starship"];
+  const navItems = ["planet", "people", "starship"];
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -30,7 +30,14 @@ const NavBar: FC = () => {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <Link to={item} style={{ textAlign: "center" }}>
+            <Link
+              to={item}
+              style={{
+                textAlign: "center",
+                textTransform: "capitalize",
+                width: "100%",
+              }}
+            >
               <ListItemButton>
                 <ListItemText primary={item} />
               </ListItemButton>
@@ -43,7 +50,10 @@ const NavBar: FC = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar component="nav">
+      <AppBar
+        component="nav"
+        sx={{ border: "unset", backgroundColor: "#3e3e3e" }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -59,8 +69,10 @@ const NavBar: FC = () => {
           </Link>
           <Box sx={{ display: { xs: "none", sm: "flex" } }}>
             {navItems.map((item) => (
-              <Link to={item.toLowerCase()} key={item}>
-                <Button sx={{ color: "#fff" }}>{item}</Button>
+              <Link to={item} key={item}>
+                <Button sx={{ color: "#fff", textTransform: "capitalize" }}>
+                  {item}
+                </Button>
               </Link>
             ))}
           </Box>
@@ -79,6 +91,8 @@ const NavBar: FC = () => {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              border: "unset",
+              backgroundColor: "#3e3e3e",
             },
           }}
         >

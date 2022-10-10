@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { FC } from "react";
 import ErrorPage from "src/pages/Error";
 import StarshipPage from "src/pages/Starship";
@@ -13,6 +13,7 @@ const Router: FC<IProps> = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<NavBar />}>
+          <Route path="" element={<Navigate to="starship" replace />} />
           <Route path="starship" element={<StarshipPage />}>
             <Route path=":id" />
           </Route>

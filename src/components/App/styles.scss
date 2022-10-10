@@ -23,5 +23,11 @@
 }
 .logo {
   @include font(26, $primary-white);
-  margin-right: 20px;
+  margin: 20px;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
 }
