@@ -1,0 +1,17 @@
+@import "src/style/mixin";
+
+.page-404 {
+  @include flex(center, 10, column, center);
+  width: 100%;
+  margin: 0 auto;
+  padding: 200px 0;
+  h1 {
+    @include font(24);
+  }
+  h2 {
+    @include font(20);
+  }
+  a {
+    @include font(18, $primary-green);
+  }
+}
