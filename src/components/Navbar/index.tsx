@@ -12,6 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Link, Outlet } from "react-router-dom";
+import { colorSet } from "src/theme";
 
 const NavBar: FC = () => {
   const drawerWidth = 240;
@@ -39,7 +40,12 @@ const NavBar: FC = () => {
               }}
             >
               <ListItemButton>
-                <ListItemText primary={item} />
+                <ListItemText
+                  primary={item}
+                  sx={{
+                    textAlign: "center",
+                  }}
+                />
               </ListItemButton>
             </Link>
           </ListItem>

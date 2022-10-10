@@ -35,7 +35,6 @@ const PlanetPage: FC = () => {
           <PlanetDetails
             item={currentPlanet}
             img={swapiService.getPlanetImage({
-              //@ts-ignore
               id: currentPlanet.id,
             })}
           />

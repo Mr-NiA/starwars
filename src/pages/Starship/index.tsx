@@ -35,7 +35,6 @@ const StarshipPage: FC = () => {
           <StarshipDetails
             item={currentStarship}
             img={swapiService.getStarshipImage({
-              //@ts-ignore
               id: currentStarship.id,
             })}
           />
